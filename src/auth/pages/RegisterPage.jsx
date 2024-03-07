@@ -4,6 +4,8 @@ import { Link as RouterLink } from "react-router-dom";
 import { AuthLayout } from "../layout/AuthLayout"
 import { useForm } from "../../hooks";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { startRegisterUserWithEmailPassword } from "../../store/auth";
 
 const formData = {
     email: '',
@@ -18,18 +20,22 @@ const formValidations = {
 }
 
 export const RegisterPage = () => {
-
+    
     const [ formSubmitted, setFormSubmitted] = useState(false);
+    const dispatch = useDispatch();
 
     const {formState, displayName, email, password, onInputChange, 
         isFormValid, displayNameValid, emailValid, passwordValid} = useForm(formData, formValidations);
 
-    console.log(isFormValid, displayNameValid, emailValid, passwordValid);
+    // console.log(isFormValid, displayNameValid, emailValid, passwordValid);
 
     const onSubmit = (event ) => {
         event.preventDefault();
         setFormSubmitted(true);
-        console.log(formState);
+
+        if( !isFormValid ) return;
+        dispatch(startRegisterUserWithEmailPassword(formState));
+
     }
     
 

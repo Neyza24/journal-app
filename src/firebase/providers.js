@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
 
@@ -22,10 +22,6 @@ export const singInWithGoogle = async() => {
         // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
-    // The email of the user's account used.
-    // const email = error.customData.email;
-    // The AuthCredential type that was used.
-    // const credential = GoogleAuthProvider.credentialFromError(error);
 
         return {
             ok: false,
@@ -34,4 +30,23 @@ export const singInWithGoogle = async() => {
     }
 }
 
-//esta función la vamos a mandar a llamar desde nusto thunk de auth 
+export const registerUserWithEmailPassword = async({email, password, displayName}) => {
+    try {
+        const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
+        const {uid, photoURL} = resp.user;
+        console.log(resp);
+        //TODO: actualzar el displayName en Firebase
+
+        return {
+            ok: true,
+            uid, photoURL, email, displayName
+        }
+        
+    } catch (error) {
+        console.log(error);
+        return {
+            ok: false,
+            errorMessage: error.message
+        }
+    }
+}
