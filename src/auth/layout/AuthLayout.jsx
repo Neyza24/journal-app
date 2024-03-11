@@ -9,10 +9,11 @@ export const AuthLayout = ({ children, title = '' }) => {
             alignItems="center"
             justifyContent="center"
             sx={{ minHeight: '100vh', backgroundColor: 'primary.main', padding: 4 }}
+            
         >
             <Grid
                 item
-                className="box-shadow" //con esto podemos agregar estilos desde nuestro archivo styles
+                className="box-shadow animate__animated animate__fadeIn animate__slow" //con esto podemos agregar estilos desde nuestro archivo styles
                 xs={3} //esto e spara decirle cuantas columnas debe ocupar en pantallas muy pequeñas, en este caso 3 - mobile first, para medianas es sm, md
                 sx={{ width:{ sm: 450}, backgroundColor: 'white', padding: 3, borderRadius: 2 }} //esto es para agregar estilos en línes
             >

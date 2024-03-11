@@ -35,7 +35,7 @@ export const LoginPage = () => {
   }
 
   return (
-    <AuthLayout title='login'>
+    <AuthLayout title='login' >
       <form onSubmit={onSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
